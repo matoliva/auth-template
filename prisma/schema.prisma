@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  purchases Purchase[]
+  reminders Reminder[]  // Add this inverse relation
+}
+
+model Purchase {
+  id            Int       @id @default(autoincrement())
+  description   String?
+  amount        Float
+  purchase_date DateTime
+  user_id       Int
+  plan_id       Int
+  user          User      @relation(fields: [user_id], references: [id])
+  plan          PaymentPlan @relation(fields: [plan_id], references: [id])
+  payments      Payment[]
+  reminders     Reminder[]  // Add this inverse relation
+}
+
+model Reminder {
+  id            Int       @id @default(autoincrement())
+  user_id       Int
+  purchase_id   Int
+  reminder_date DateTime
+  status        String
+  user          User      @relation(fields: [user_id], references: [id])
+  purchase      Purchase  @relation(fields: [purchase_id], references: [id])
+}
+
+model PaymentPlan {
+  id                     Int       @id @default(autoincrement())
+  name                   String
+  total_duration_in_months Int
+  payment_frequency       String
+  interest_rate           Float?
+  purchases               Purchase[]
+}
+
+model Payment {
+  id               Int      @id @default(autoincrement())
+  purchase_id      Int
+  payment_date     DateTime
+  amount_paid      Float
+  remaining_balance Float
+  purchase         Purchase @relation(fields: [purchase_id], references: [id])
+}
