@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+I apologize for the confusion. You're right to ask for the entire markdown content without any additional formatting. Here's the complete, raw markdown content for your README, ready to be copied and pasted directly into your GitHub repository:
+
+
+
+# Next.js Template with Google Authentication
+
+This template provides a quick start for building web applications with Next.js, featuring Google Authentication out of the box. It's designed to be a solid foundation for your side projects, allowing you to focus on building features rather than setting up the basics.
+
+## Tech Stack
+
+- **Frontend Framework**: Next.js (using the App Router)
+- **Styling**: Shadcn
+- **Database**: SQLite with Prisma as ORM
+- **Authentication**: NextAuth.js
+- **ORM**: Prisma
+- **Language**: TypeScript
+
+## Features
+
+- Pre-configured Google Authentication
+- Modern, responsive UI with Shadcn components
+- Type-safe database operations with Prisma
+- Built with TypeScript for enhanced developer experience
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/nextjs-google-auth-template.git
+   cd nextjs-google-auth-template
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set up your environment variables:
+   - Copy `.env.example` to `.env.local`
+   - Fill in your Google OAuth credentials and other necessary variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Set up the database:
+   ```
+   npx prisma migrate dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Run the development server:
+   ```
+   npm run dev
+   ```
 
-## Learn More
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
+## Google Authentication Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Navigate to "APIs & Services" > "Credentials"
+4. Click "Create Credentials" and select "OAuth client ID"
+5. Choose "Web application" as the application type
+6. Add `http://localhost:3000` to the Authorized JavaScript origins
+7. Add `http://localhost:3000/api/auth/callback/google` to the Authorized redirect URIs
+8. Copy the Client ID and Client Secret
+9. Paste these values into your `.env.local` file:
+   ```
+   GOOGLE_CLIENT_ID=your_client_id_here
+   GOOGLE_CLIENT_SECRET=your_client_secret_here
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Customization
 
-## Deploy on Vercel
+- Modify the Prisma schema in `prisma/schema.prisma` to fit your data model
+- Adjust the authentication options in `pages/api/auth/[...nextauth].ts`
+- Customize the UI components in the `components` directory
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This template is ready for deployment on platforms like Vercel or Netlify. Make sure to set up your environment variables in your deployment platform's settings.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
