@@ -1,7 +1,3 @@
-I apologize for the confusion. You're right to ask for the entire markdown content without any additional formatting. Here's the complete, raw markdown content for your README, ready to be copied and pasted directly into your GitHub repository:
-
-
-
 # Next.js Template with Google Authentication
 
 This template provides a quick start for building web applications with Next.js, featuring Google Authentication out of the box. It's designed to be a solid foundation for your side projects, allowing you to focus on building features rather than setting up the basics.
